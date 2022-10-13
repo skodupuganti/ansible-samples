@@ -1,0 +1,35 @@
+# OpenBSD: sshd_config,v 1.101 2017/03/14 07:19:07 djm Exp $
+
+Port 22
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Ciphers and keying
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128
+MACs hmac-sha1,umac-64@openssh.com,hmac-ripemd160
+
+# Logging
+# SyslogFacility AUTH
+# LogLevel INFO
+
+# Authentication: Nothing but an RSA! 
+LoginGraceTime 2m
+PermitRootLogin no
+StrictModes yes
+MaxAuthTries 6
+MaxSessions 10
+PubkeyAuthentication   yes
+AuthorizedKeysFilie    .ssh/authorized_keys
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM no
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem sftp /usr/lib/openssh/sftp-server
+AllowAgentForwarding yes
+

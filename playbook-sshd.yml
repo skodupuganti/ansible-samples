@@ -1,0 +1,19 @@
+---
+- name: Disable Cipher Block Chaining (CBC) Mode Ciphers and Weak MAC Algorithms in SSH
+  hosts: zoidberg
+  tasks:
+  - name: Disable CBC and force the latest ciphers and algorithms for SSH
+    copy:
+      src:  ~/mycode/templates/sshd_config
+      dest: /etc/ssh/sshd_config
+    become: yes
+    notify: 
+      - ssh-restart
+
+  handlers:
+  - name: ssh-restart
+    service:
+      name: ssh
+      enabled: yes
+      state: restarted
+

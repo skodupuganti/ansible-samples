@@ -1,0 +1,5 @@
+---
+- name: Disable Cipher Block Chaining (CBC) Mode Ciphers and Weak MAC Algorithms in SSH
+  hosts: fry
+  roles:
+  - sshd_config
